@@ -1,0 +1,156 @@
+body {
+  background: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+  background-size: cover;
+  height: 85vh;
+}
+
+.container {
+  background-image: url(sunny_sky.jpg);
+  background-size: cover;
+  height: 500px;
+  width: 750px;
+  margin: 2vw;
+  padding: 0;
+  font-family: "Roboto Condensed", sans-serif;
+  border-radius: 0.5rem;
+  color: whitesmoke;
+  display: flex;
+  margin: 15vh auto;
+}
+
+.cover {
+  background-color: rgba(73, 72, 72, 0.404);
+  width: 100%;
+  height: 100%;
+
+  border-radius: 0.5rem;
+  padding: 0;
+}
+
+.btn {
+  border: none;
+  background: transparent;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+}
+
+.left {
+  background: radial-gradient(
+    circle at 18.7% 37.8%,
+    rgba(250, 250, 250, 0.1) 0%,
+    rgba(225, 234, 238, 0.1) 90%
+  );
+  height: 100%;
+  padding: 2vw;
+  border-radius: 0.5rem;
+}
+
+.btn:hover {
+  background-color: rgba(190, 188, 188, 0.418);
+}
+
+.main {
+  margin-left: 0;
+  margin-right: 0;
+  height: 100%;
+  width: 100%;
+}
+.buttons {
+  padding-top: ;
+}
+
+.search {
+  background: transparent;
+  border: none;
+  border-top-left-radius: 0.2rem;
+  border-bottom-left-radius: 0.2rem;
+  color: rgb(255, 255, 255);
+  font-size: 0.75rem;
+  padding-top: 0.6rem;
+}
+
+.form-control {
+  border: none;
+  font-size: 1rem;
+  background: transparent;
+  padding-left: 0.5rem;
+}
+
+.form-control:focus {
+  background: transparent;
+}
+
+test {
+  background-color: rgba(216, 212, 212, 0.164);
+}
+
+.form-control::placeholder {
+  color: rgb(255, 255, 255);
+}
+
+.large-temp {
+  font-size: 6rem;
+}
+
+.small-temp {
+  padding-left: 4rem;
+}
+
+.details {
+  margin-top: 1.9rem;
+}
+
+h1 {
+  font-size: 1.65rem;
+  font-weight: 200;
+}
+p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+.card {
+  margin-top: 2rem;
+  background: transparent;
+  color: rgb(255, 255, 255);
+  border-color: whitesmoke;
+}
+
+.list-group {
+  --bs-list-group-bg: transparent;
+  --bs-list-group-border-color: none;
+  background-color: rgba(56, 56, 56, 0.164);
+}
+.list-group-item {
+  color: rgb(252, 252, 252);
+}
+
+.card-header {
+  border-color: whitesmoke;
+  background-color: rgba(216, 212, 212, 0.164);
+}
+
+.today {
+  background: transparent;
+  background-size: cover;
+}
+
+.tomorrow {
+  background: url(cloudy_sky.jpg);
+  background-size: cover;
+}
+
+.nextDay {
+  background: url(stormy_sky.jpg);
+  background-size: cover;
+}
+
+.nextNextDay {
+  background: url(rain_sky.jpg);
+  background-size: cover;
+}
+
+h2 {
+  margin-top: 2vw;
+  margin-left: 0.5rem;
+}
