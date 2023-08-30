@@ -19,8 +19,10 @@
       src="https://kit.fontawesome.com/9bbf9f297e.js"
       crossorigin="anonymous"
     ></script>
+    <script></script>
     <link rel="stylesheet" href="style.css" />
     <title>Document</title>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -50,23 +52,25 @@
                   <h2 id="date">29 August, 2023</h2>
                 </div>
                 <div class="col-3" id="toggle">
-                  <button id="c" class = "selected">C°</button><span>|</span>
+                  <button id="c" class="selected">C°</button><span>|</span>
                   <button id="f">F°</button>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col">
-                <p class="large-temp">29°C</p>
+                <p class="large-temp" id="liveTemp">29°C</p>
                 <div class="row">
-                  <div class="col small-temp">29°C | 14°C</div>
+                  <div class="col small-temp">
+                    <p id="live_mmTemp">29°C | 14°C</p>
+                  </div>
                 </div>
               </div>
               <div class="col-7 details">
-                <h1>Sunny Clear Skies</h1>
-                <p><b>Feels Like: </b>28°</p>
-                <p><b>Wind: </b>4mph</p>
-                <p><b>Humidity: </b>31%</p>
+                <h1 id="weather">Sunny Clear Skies</h1>
+                <p id="feels"><b>Feels Like: </b>28°</p>
+                <p id="wind"><b>Wind: </b>4mph</p>
+                <p id = "humidity"><b>Humidity: </b>31%</p>
               </div>
             </div>
             <div class="row">
@@ -74,11 +78,11 @@
                 <div class="card today">
                   <div class="card-header">Today</div>
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
+                    <li class="list-group-item" id="today-temp">
                       <h3>29°C</h3>
                       | 14°C
                     </li>
-                    <li class="list-group-item">Sunny</li>
+                    <li id="today-weather" class="list-group-item">Sunny</li>
                   </ul>
                 </div>
               </div>
@@ -86,11 +90,11 @@
                 <div class="card tomorrow">
                   <div class="card-header">Tomorrow</div>
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                      <h3>27°C</h3>
-                      | 15°C
+                    <li class="list-group-item" id="tom-temp">
+                      <h3>°C</h3>
+                      | °C
                     </li>
-                    <li class="list-group-item">Cloudy</li>
+                    <li class="list-group-item" id="tom-weather"></li>
                   </ul>
                 </div>
               </div>
@@ -98,11 +102,11 @@
                 <div class="card nextDay">
                   <div class="card-header">Wednesday</div>
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                      <h3>25°C</h3>
-                      | 11°C
+                    <li class="list-group-item" id="a-temp">
+                      <h3>°C</h3>
+                      | °C
                     </li>
-                    <li class="list-group-item">Stormy</li>
+                    <li class="list-group-item" id="a-weather"></li>
                   </ul>
                 </div>
               </div>
@@ -110,11 +114,11 @@
                 <div class="card nextNextDay">
                   <div class="card-header">Thursday</div>
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                      <h3>21°C</h3>
-                      | 10°C
+                    <li class="list-group-item" id="aa-temp">
+                      <h3>°C</h3>
+                      | °C
                     </li>
-                    <li class="list-group-item">Rainy</li>
+                    <li class="list-group-item" id="aa-weather"></li>
                   </ul>
                 </div>
               </div>
