@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src="script.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
@@ -28,28 +27,33 @@
       <div class="cover">
         <div class="row main">
           <div class="col-3 left">
-            <div class="row">
-              <div class="col-2">
-                <button class="search">
-                  <i class="fas fa-search fa-lg text"></i>
-                </button>
-              </div>
-              <div class="col">
-                <input
-                  type="datalist"
-                  class="form-control"
-                  placeholder="Find City"
-                  aria-describedby="basic-addon1"
-                />
-              </div>
-            </div>
+            <form>
+              <input
+                id="city"
+                type="text"
+                class="city"
+                placeholder="Find City"
+                aria-describedby="basic-addon1"
+              />
+              <input
+                type="submit"
+                value=""
+                class="search fas fa-search fa-lg text"
+              />
+            </form>
           </div>
-
           <div class="col-9">
             <div class="col-12">
-              <h2>
-                Pretoria, South Africa <br /><small>29 August, 2023</small>
-              </h2>
+              <div class="row">
+                <div class="col-9">
+                  <h2 id="livecity">Pretoria, South Africa</h2>
+                  <h2 id="date">29 August, 2023</h2>
+                </div>
+                <div class="col-3" id="toggle">
+                  <button id="c" class = "selected">C°</button><span>|</span>
+                  <button id="f">F°</button>
+                </div>
+              </div>
             </div>
             <div class="row">
               <div class="col">
@@ -119,5 +123,6 @@
         </div>
       </div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>

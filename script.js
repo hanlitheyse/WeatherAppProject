@@ -1,37 +1,61 @@
-let weather = {
-  paris: {
-    temp: 19.7,
-    humidity: 80,
-  },
-  tokyo: {
-    temp: 17.3,
-    humidity: 50,
-  },
-  lisbon: {
-    temp: 30.2,
-    humidity: 20,
-  },
-  "san francisco": {
-    temp: 20.9,
-    humidity: 100,
-  },
-  oslo: {
-    temp: -5,
-    humidity: 20,
-  },
+function createDate(date) {
+  let month = date.toLocaleString("en-AU", { month: "short" });
+  let time = date.toLocaleTimeString("en-AU", { timeStyle: "short" });
+  let day = date.toLocaleString("en-AU", { day: "2-digit" });
+  let wDay = date.toLocaleString("en-AU", { weekday: "short" });
+  return `${wDay}, ${day} ${month},${time}`;
+}
+
+function postDate(date) {
+  let liveDate = document.querySelector("#date");
+  liveDate.innerHTML = createDate(new Date());
+}
+
+postDate();
+
+let townFrm = document.querySelector("form");
+console.log(townFrm);
+townFrm.onsubmit = (event) => {
+  event.preventDefault();
+  let city = document.querySelector("#city").value;
+  postCity(city);
 };
 
-city = prompt("Enter a city");
+function postCity(city) {
+  let liveCity = document.querySelector("#livecity");
+  liveCity.innerHTML = city;
+}
 
-weather[city] == undefined
-  ? alert(
-      `Sorry, we don't know the weather for this city, try going to https://www.google.com/search?q=weather+${city}`
-    )
-  : getWeather(city);
+let cBtn = document.querySelector("#c");
+let fBtn = document.querySelector("#f");
 
-function getWeather(city) {
-  let temp = weather[city].temp;
-  temp = Math.round(temp);
-  let humidity = weather[city].humidity;
-  alert(`It is currently ${temp}° in ${city} with a humidity of ${humidity}%`);
+cBtn.onclick = () => {
+  if (checkToggle(cBtn) == false) {
+    cBtn.classList.add("selected");
+    fBtn.classList.remove("selected");
+    toggleTemp("c");
+  }
+};
+
+fBtn.onclick = () => {
+  if (checkToggle(fBtn) == false) {
+    fBtn.classList.add("selected");
+    cBtn.classList.remove("selected");
+    toggleTemp("f");
+  }
+};
+function checkToggle(btn) {
+  return btn.classList.contains("selected") == true ? true : false;
+}
+
+function toggleTemp(unit) {
+  let liveTemp = document.querySelector(".large-temp");
+  switch (unit) {
+    case "c":
+      liveTemp.innerHTML = "29°C";
+      break;
+    case "f":
+      liveTemp.innerHTML = "69°F";
+      break;
+  }
 }

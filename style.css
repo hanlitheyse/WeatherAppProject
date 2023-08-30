@@ -70,14 +70,16 @@ body {
   padding-top: 0.6rem;
 }
 
-.form-control {
+.city {
   border: none;
   font-size: 1rem;
   background: transparent;
   padding-left: 0.5rem;
+  margin-right: 0;
+  color: rgb(255, 255, 255);
 }
 
-.form-control:focus {
+.city:focus {
   background: transparent;
 }
 
@@ -85,8 +87,9 @@ test {
   background-color: rgba(216, 212, 212, 0.164);
 }
 
-.form-control::placeholder {
+.city::placeholder {
   color: rgb(255, 255, 255);
+  margin-right: 0;
 }
 
 .large-temp {
@@ -151,6 +154,49 @@ p {
 }
 
 h2 {
-  margin-top: 2vw;
+  margin-top: 3vw;
   margin-left: 0.5rem;
+  font-size: 2rem;
+}
+
+#date {
+  font-size: 1rem;
+  margin-top: 0;
+  margin-left: 0.5rem;
+}
+
+input[type="submit"] {
+  font-family: "Font Awesome 5 Free", Tahoma;
+  font-size: 1.2rem;
+  height: 1.75rem;
+  margin-right: 0;
+  width: fit-content;
+  padding: 0.5rem;
+}
+input[type="text"] {
+  width: 6.5rem;
+}
+
+.search:hover {
+  cursor: pointer;
+}
+
+#c {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  border: none;
+}
+#f {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  border: none;
+}
+
+#toggle {
+  align-self: flex-end;
+}
+
+.selected {
+  color: rgb(255, 255, 255) !important;
+  font-size: 1.5rem;
 }
