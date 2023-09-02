@@ -200,3 +200,50 @@ input[type="text"] {
   color: rgb(255, 255, 255) !important;
   font-size: 1.5rem;
 }
+
+.sunny {
+  background-image: url(sunny_sky.jpg);
+  background-size: cover;
+}
+
+.partlyCloudy {
+  background-image: url(mostly_sunny.jpg);
+  background-size: cover;
+}
+
+.cloudy {
+  background-image: url(cloudy_sky.jpg);
+  background-size: cover;
+}
+
+.snow {
+  background-image: url(snow.jpg);
+  background-size: cover;
+}
+
+.storm {
+  background-image: url(stormy_sky.jpg);
+  background-size: cover;
+}
+
+.rain {
+  background-image: url(rain_sky.jpg);
+  background-size: cover;
+}
+
+.mist {
+  background-image: url(mist.jpg);
+  background-size: cover;
+}
+
+.lightRain {
+  background-image: url(lightRain.jpg);
+  background-size: cover;
+}
+
+.patchySnow {
+  background-image: url(patchySnow.jpg);
+  background-size: cover;
+}
+
+

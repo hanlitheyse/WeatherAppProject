@@ -13,7 +13,7 @@ function getLocation(position) {
 
 function getWeatherCurrentLocation(lon, lat) {
   let apiNowUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
-  let apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=249d758901864c4a8d893119233008&q=${lat},${lon}&days=7`;
+  let apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=249d758901864c4a8d893119233008&q=${lat},${lon}&days=3`;
   axios.get(apiUrl).then(forecastResponse);
   axios.get(apiNowUrl).then(weatherResponse);
   searchLoc = "current";
@@ -21,7 +21,7 @@ function getWeatherCurrentLocation(lon, lat) {
 
 function getWeather(location) {
   let apiNowUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
-  let apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=249d758901864c4a8d893119233008&q=${location}&days=7`;
+  let apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=249d758901864c4a8d893119233008&q=${location}&days=3`;
   axios.get(apiUrl).then(forecastResponse);
 
   axios.get(apiNowUrl).then(weatherResponse);
@@ -71,7 +71,7 @@ function weatherResponse(response) {
 }
 
 function forecastResponse(response) {
-  let tomMax = Math.round(response.data.forecast.forecastday[0].day.maxtemp_c);
+   let tomMax = Math.round(response.data.forecast.forecastday[0].day.maxtemp_c);
   let tomMin = Math.round(response.data.forecast.forecastday[0].day.mintemp_c);
   let tomWeather = response.data.forecast.forecastday[0].day.condition.text;
   let aTomMax = Math.round(response.data.forecast.forecastday[1].day.maxtemp_c);
@@ -99,7 +99,8 @@ function forecastResponse(response) {
   let weather_aaTom = document.querySelector("li#aa-weather");
   temp_aaTom.innerHTML = `<h3>${aaTomMax}°C</h3>| ${aaTomMin}°C`;
   weather_aaTom.innerHTML = `${aaTomWeather}`;
-}
+  
+  createIcon(weatherTom, weather_aTom, weather_aaTom);
 
 function createDate(date) {
   let month = date.toLocaleString("en-AU", { month: "short" });
@@ -107,7 +108,141 @@ function createDate(date) {
   let day = date.toLocaleString("en-AU", { day: "2-digit" });
   let wDay = date.toLocaleString("en-AU", { weekday: "short" });
   return `${wDay}, ${day} ${month}, ${time}`;
-}
+  }
+  
+  createIcon(tom, aTom, aaTom){
+    let liveTom = document.querySelector(".card_tomorrow");
+     let live_aTom = document.querySelector(".card_a");
+    letLive_aaTom = document.querySelector(".card_aa");
+
+    liveTom.classList.remove("sunny");
+    liveTom.classList.remove("partlyCloudy");
+    liveTom.classList.remove("cloudy");
+    liveTom.classList.remove("snow");
+    liveTom.classList.remove("storm");
+    liveTom.classList.remove("rain");
+    liveTom.classList.remove("mist");
+    liveTom.classList.remove("lightRain");
+
+
+  live_aTom.classList.remove("sunny");
+    live_aTom.classList.remove("partlyCloudy");
+    live_aTom.classList.remove("cloudy");
+    live_aTom.classList.remove("snow");
+    live_aTom.classList.remove("storm");
+    live_aTom.classList.remove("rain");
+    live_aTom.classList.remove("lightRain");
+    live_aTom.classList.remove("mist");
+   
+
+    live_aaTom.classList.remove("sunny");
+    live_aaTom.classList.remove("partlyCloudy");
+    live_aaTom.classList.remove("cloudy");
+    live_aaTom.classList.remove("snow");
+    live_aaTom.classList.remove("storm");
+    live_aaTom.classList.remove("rain");
+    live_aaTom.classList.remove("mist");
+    live_aaTom.classList.remove("lightRain");
+
+
+   
+    switch (tom){
+      case "sunny":
+        liveTom.classList.add("sunny");
+        break;
+      case "Partly Cloudy":
+        liveTom.classList.add("partlyCloudy");
+        break;
+      case "Cloudy":
+        liveTom.classList.add("cloudy");
+        break;
+      case "Overcast":
+        liveTom.classList.add("cloudy");
+        break;
+      case "Mist":
+        liveTom.classList.add("mist");
+        break;
+      case "Patchy rain possible":
+        liveTom.classList.add("patchyRain");
+        break;
+      case "Patchy snow possible":
+        liveTom.classList.add("patchySnow");
+        break;
+      case  "Patchy sleet possible":
+        liveTom.classList.add("rain");
+        break;
+      case "Patchy freezing drizzle possible":
+        liveTom.classList.add("rain");
+        break;
+      case "Thundery outbreaks possible":
+        liveTom.classList.add("storm");
+        break;
+      case "Blowing snow":
+        liveTom.classList.add("snow");
+        break;
+      case "Blizzard":
+        liveTom.classList.add("snow");
+        break;
+      case "Fog":
+        liveTom.classList.add("mist")
+        break;
+      case "Freezing fog":
+        liveTom.classList.add("mist");
+        break;
+      case "Light drizzle":
+        liveTom.classList.add("cloudy");
+        break;
+      case "Freezing drizzle":
+        liveTom.classList.add("rain");
+        break;
+      case "Heavy freezing drizzle":
+        liveTom.classList.add("rain");
+        break;
+      case "Patchy light rain":
+        liveTom.classList,add("lightRain");
+        break;
+      case "Light rain":
+        liveTom.classList.add("lightRain");
+        break;
+      case "Moderate rain at times":
+        liveTom.classList.add("lightRain");
+        break;
+      case "Moderate rain":
+        liveTom.classList.add("lightRain");
+        break;
+      case "Heavy rain at times":
+        liveTom.classList.add("rain");
+        break;
+      case "Heavy rain":
+        liveTom.classList.add("rain");
+        break;
+      case "Light freezing rain":
+        liveTom.classList.add("lightRain");
+        break;
+      case "Moderate or heavy freezing rain":
+        liveTom.classList.add("rain");
+        break;
+      case "Light sleet":
+        liveTom.classList.add("lightRain");
+        break;
+      case "Moderate or heavy sleet":
+        liveTom.classList.add("rain");
+        break;
+      case "Patchy light snow":
+        liveTom.classList.add("patchySnow");
+        break;
+      case "Light Snow":
+        liveTom.classList.add("patchySnow");
+        break;
+      case "Patchy moderate snow":
+        liveTom.classList.add("patchySnow");
+        break;
+      case "Moderate snow":
+        liveTom.classList.add("patchySnow");
+        break;
+      case 
+    }
+  }
 
 let townFrm = document.querySelector("form");
 
