@@ -15,13 +15,13 @@ function getWeatherCurrentLocation(lon, lat) {
   let apiNowUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
   let apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=249d758901864c4a8d893119233008&q=${lat},${lon}&days=7`;
   axios.get(apiUrl).then(forecastResponse);
-  axios.get(apiNowUrl).then(weatherResponse).;
+  axios.get(apiNowUrl).then(weatherResponse);
   searchLoc = "current";
 }
 
 function getWeather(location) {
   let apiNowUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
-  let apiUrl = `http://api.weatherapi.com/v1/forecast.json?key=249d758901864c4a8d893119233008&q=${location}&days=7`;
+  let apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=249d758901864c4a8d893119233008&q=${location}&days=7`;
   axios.get(apiUrl).then(forecastResponse);
 
   axios.get(apiNowUrl).then(weatherResponse);
