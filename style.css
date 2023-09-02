@@ -214,3 +214,7 @@ input[type="text"] {
   align-self: flex-end;
   justify-self: end;
 }
+
+a {
+  color: #258a90;
+}
