@@ -29,6 +29,12 @@ function getWeather(location) {
 }
 
 function weatherResponse(response) {
+  let icon = response.data.weather[0].icon;
+  let iconSrc = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+  console.log(icon);
+  let liveIcon = document.getElementById("icon");
+  liveIcon.setAttribute("src", iconSrc);
+
   let country = response.data.sys.country;
   let city = response.data.name;
   console.log(country, city);
@@ -71,36 +77,237 @@ function weatherResponse(response) {
 }
 
 function forecastResponse(response) {
-   let tomMax = Math.round(response.data.forecast.forecastday[0].day.maxtemp_c);
+  let tomMax = Math.round(response.data.forecast.forecastday[0].day.maxtemp_c);
   let tomMin = Math.round(response.data.forecast.forecastday[0].day.mintemp_c);
   let tomWeather = response.data.forecast.forecastday[0].day.condition.text;
-  let aTomMax = Math.round(response.data.forecast.forecastday[1].day.maxtemp_c);
-  let aTomMin = Math.round(response.data.forecast.forecastday[1].day.mintemp_c);
-  let aTomWeather = response.data.forecast.forecastday[1].day.condition.text;
-  let aaTomMax = Math.round(
+  tomForecast(tomMax, tomMin, tomWeather);
+
+  let a_tomMax = Math.round(
+    response.data.forecast.forecastday[1].day.maxtemp_c
+  );
+  let a_tomMin = Math.round(
+    response.data.forecast.forecastday[1].day.mintemp_c
+  );
+  let a_tomWeather = response.data.forecast.forecastday[1].day.condition.text;
+  a_tomForecast(a_tomMax, a_tomMin, a_tomWeather);
+
+  let aa_tomMax = Math.round(
     response.data.forecast.forecastday[2].day.maxtemp_c
   );
-  let aaTomMin = Math.round(
+  let aa_tomMin = Math.round(
     response.data.forecast.forecastday[2].day.mintemp_c
   );
-  let aaTomWeather = response.data.forecast.forecastday[0].day.condition.text;
+  let aa_tomWeather = response.data.forecast.forecastday[2].day.condition.text;
+  aa_tomForecast(aa_tomMax, aa_tomMin, aa_tomWeather);
+  createIcon(tomWeather, a_tomWeather, aa_tomWeather);
+}
 
-  let tempTom = document.querySelector("li#a-temp");
-  let weatherTom = document.querySelector("li#a-weather");
-  tempTom.innerHTML = `<h3>${tomMax}°C</h3>| ${tomMin}°C`;
-  weatherTom.innerHTML = `${tomWeather}`;
+function tomForecast(max, min, weather) {
+  let live_temp = document.querySelector("li#tom-temp");
+  let live_weather = document.querySelector("li#tom-weather");
 
-  let temp_aTom = document.querySelector("li#tom-temp");
-  let weather_aTom = document.querySelector("li#tom-weather");
-  temp_aTom.innerHTML = `<h3>${aTomMax}°C</h3>| ${aTomMin}°C`;
-  weather_aTom.innerHTML = `${aTomWeather}`;
+  live_temp.innerHTML = `<h3>${max}°C</h3>| ${min}°C`;
+  live_weather.innerHTML = `${weather}`;
+}
 
-  let temp_aaTom = document.querySelector("li#aa-temp");
-  let weather_aaTom = document.querySelector("li#aa-weather");
-  temp_aaTom.innerHTML = `<h3>${aaTomMax}°C</h3>| ${aaTomMin}°C`;
-  weather_aaTom.innerHTML = `${aaTomWeather}`;
-  
-  createIcon(weatherTom, weather_aTom, weather_aaTom);
+function a_tomForecast(max, min, weather) {
+  let live_temp = document.querySelector("li#a-temp");
+  let live_weather = document.querySelector("li#a-weather");
+
+  live_temp.innerHTML = `<h3>${max}°C</h3>| ${min}°C`;
+  live_weather.innerHTML = `${weather}`;
+}
+
+function aa_tomForecast(max, min, weather) {
+  let live_temp = document.querySelector("li#aa-temp");
+  let live_weather = document.querySelector("li#aa-weather");
+
+  live_temp.innerHTML = `<h3>${max}°C</h3>| ${min}°C`;
+  live_weather.innerHTML = `${weather}`;
+}
+
+function createIcon(tom, a_tom, aa_tom) {
+  console.log(a_tom, aa_tom);
+  let liveTom = document.getElementById("tom");
+  let live_aTom = document.getElementById("a_tom");
+  let live_aaTom = document.getElementById("aa_tom");
+
+  if (tom === "Sunny") {
+    liveTom.style.backgroundImage = "url(sunny_sky.jpg)";
+  } else if (
+    tom === "Cloudy" ||
+    tom === "Overcast" ||
+    tom === "Light drizzle"
+  ) {
+    liveTom.style.backgroundImage = "url(cloudy_sky.jpg)";
+  } else if (tom === "Partly cloudy") {
+    liveTom.style.backgroundImage = "url(mostly_sunny.jpg)";
+  } else if (tom === "Mist" || tom === "Fog" || tom === "Freezing fog") {
+    liveTom.style.backgroundImage = "url(mist.jpg)";
+  } else if (
+    tom === "Patchy rain possible" ||
+    tom === "Patchy light rain" ||
+    tom === "Light rain" ||
+    tom === "Moderate rain at times" ||
+    tom === "Moderate rain" ||
+    tom === "Light freezing rain"
+  ) {
+    liveTom.style.backgroundImage = "url(lightRain.jpg)";
+  } else if (
+    tom === "Patchy sleet possible" ||
+    tom === "Patchy freezing drizzle possible" ||
+    tom === "Freezing drizzle" ||
+    tom === "Heavy freezing drizzle" ||
+    tom === "Heavy rain at times" ||
+    tom === "Heavy rain" ||
+    tom === "Moderate or heavy freezing rain" ||
+    tom === "Light sleet" ||
+    tom === "Moderate or heavy sleet" ||
+    tom === "Moderate or heavy showers of ice pellets"
+  ) {
+    liveTom.style.backgroundImage = "url(rain.jpg)";
+  } else if (
+    tom === "Thundery outbreaks possible" ||
+    tom === "Moderate or heavy snow with thunder" ||
+    tom === "Patchy light snow with thunder" ||
+    tom === "Moderate or heavy rain with thunder" ||
+    tom === "Patchy light rain with thunder"
+  ) {
+    liveTom.style.backgroundImage = "url(stormy_sky.jpg)";
+  } else if (
+    tom === "Patchy light snow" ||
+    tom === "Light snow" ||
+    tom === " Patchy moderate snow" ||
+    tom === "Moderate snow"
+  ) {
+    liveTom.style.backgroundImage = "url(patchySnow).jpg)";
+  } else if (
+    tom === "Patchy heavy snow" ||
+    tom === "Heavy snow" ||
+    tom === "Moderate or heavy snow showers"
+  ) {
+    liveTom.style.backgroundImage = "url(snow).jpg)";
+  }
+
+  if (a_tom === "Sunny") {
+    live_aTom.style.backgroundImage = "url(sunny_sky.jpg)";
+  } else if (
+    a_tom === "Cloudy" ||
+    a_tom === "Overcast" ||
+    a_tom === "Light drizzle"
+  ) {
+    live_aTom.style.backgroundImage = "url(cloudy_sky.jpg)";
+  } else if (a_tom === "Partly cloudy") {
+    live_aTom.style.backgroundImage = "url(mostly_sunny.jpg)";
+  } else if (a_tom === "Mist" || a_tom === "Fog" || a_tom === "Freezing fog") {
+    live_aTom.style.backgroundImage = "url(mist.jpg)";
+  } else if (
+    a_tom === "Patchy rain possible" ||
+    a_tom === "Patchy light rain" ||
+    a_tom === "Light rain" ||
+    a_tom === "Moderate rain at times" ||
+    a_tom === "Moderate rain" ||
+    a_tom === "Light freezing rain"
+  ) {
+    console.log("got it");
+    live_aTom.style.backgroundImage = "url(lightRain.jpg)";
+  } else if (
+    a_tom === "Patchy sleet possible" ||
+    a_tom === "Patchy freezing drizzle possible" ||
+    a_tom === "Freezing drizzle" ||
+    a_tom === "Heavy freezing drizzle" ||
+    a_tom === "Heavy rain at times" ||
+    a_tom === "Heavy rain" ||
+    a_tom === "Moderate or heavy freezing rain" ||
+    a_tom === "Light sleet" ||
+    a_tom === "Moderate or heavy sleet" ||
+    a_tom === "Moderate or heavy showers of ice pellets"
+  ) {
+    live_aTom.style.backgroundImage = "url(rain.jpg)";
+  } else if (
+    a_tom === "Thundery outbreaks possible" ||
+    a_tom === "Moderate or heavy snow with thunder" ||
+    a_tom === "Patchy light snow with thunder" ||
+    a_tom === "Moderate or heavy rain with thunder" ||
+    a_tom === "Patchy light rain with thunder"
+  ) {
+    live_aTom.style.backgroundImage = "url(stormy_sky.jpg)";
+  } else if (
+    a_tom === "Patchy light snow" ||
+    a_tom === "Light snow" ||
+    a_tom === " Patchy moderate snow" ||
+    a_tom === "Moderate snow"
+  ) {
+    live_aTom.style.backgroundImage = "url(patchySnow).jpg)";
+  } else if (
+    a_tom === "Patchy heavy snow" ||
+    a_tom === "Heavy snow" ||
+    a_tom === "Moderate or heavy snow showers"
+  ) {
+    live_aTom.style.backgroundImage = "url(snow).jpg)";
+  }
+
+  if (aa_tom === "Sunny") {
+    live_aaTom.style.backgroundImage = "url(sunny_sky.jpg)";
+  } else if (
+    aa_tom === "Cloudy" ||
+    aa_tom === "Overcast" ||
+    aa_tom === "Light drizzle"
+  ) {
+    live_aaTom.style.backgroundImage = "url(cloudy_sky.jpg)";
+  } else if (aa_tom === "Partly cloudy") {
+    live_aaTom.style.backgroundImage = "url(mostly_sunny.jpg)";
+  } else if (
+    aa_tom === "Mist" ||
+    aa_tom === "Fog" ||
+    aa_tom === "Freezing fog"
+  ) {
+    live_aaTom.style.backgroundImage = "url(mist.jpg)";
+  } else if (
+    aa_tom === "Patchy rain possible" ||
+    aa_tom === "Patchy light rain" ||
+    aa_tom === "Light rain" ||
+    aa_tom === "Moderate rain at times" ||
+    aa_tom === "Moderate rain" ||
+    aa_tom === "Light freezing rain"
+  ) {
+    live_aaTom.style.backgroundImage = "url(lightRain.jpg)";
+  } else if (
+    aa_tom === "Patchy sleet possible" ||
+    aa_tom === "Patchy freezing drizzle possible" ||
+    aa_tom === "Freezing drizzle" ||
+    aa_tom === "Heavy freezing drizzle" ||
+    aa_tom === "Heavy rain at times" ||
+    aa_tom === "Heavy rain" ||
+    aa_tom === "Moderate or heavy freezing rain" ||
+    aa_tom === "Light sleet" ||
+    aa_tom === "Moderate or heavy sleet" ||
+    aa_tom === "Moderate or heavy showers of ice pellets"
+  ) {
+    live_aaTom.style.backgroundImage = "url(rain.jpg)";
+  } else if (
+    aa_tom === "Thundery outbreaks possible" ||
+    aa_tom === "Moderate or heavy snow with thunder" ||
+    aa_tom === "Patchy light snow with thunder" ||
+    aa_tom === "Moderate or heavy rain with thunder" ||
+    aa_tom === "Patchy light rain with thunder"
+  ) {
+    live_aaTom.style.backgroundImage = "url(stormy_sky.jpg)";
+  } else if (
+    aa_tom === "Patchy light snow" ||
+    aa_tom === "Light snow" ||
+    aa_tom === " Patchy moderate snow" ||
+    aa_tom === "Moderate snow"
+  ) {
+    live_aaTom.style.backgroundImage = "url(patchySnow).jpg)";
+  } else if (
+    aa_tom === "Patchy heavy snow" ||
+    aa_tom === "Heavy snow" ||
+    a_tom === "Moderate or heavy snow showers"
+  ) {
+    live_aaTom.style.backgroundImage = "url(snow).jpg)";
+  }
+}
 
 function createDate(date) {
   let month = date.toLocaleString("en-AU", { month: "short" });
@@ -108,141 +315,7 @@ function createDate(date) {
   let day = date.toLocaleString("en-AU", { day: "2-digit" });
   let wDay = date.toLocaleString("en-AU", { weekday: "short" });
   return `${wDay}, ${day} ${month}, ${time}`;
-  }
-  
-  createIcon(tom, aTom, aaTom){
-    let liveTom = document.querySelector(".card_tomorrow");
-     let live_aTom = document.querySelector(".card_a");
-    letLive_aaTom = document.querySelector(".card_aa");
-
-    liveTom.classList.remove("sunny");
-    liveTom.classList.remove("partlyCloudy");
-    liveTom.classList.remove("cloudy");
-    liveTom.classList.remove("snow");
-    liveTom.classList.remove("storm");
-    liveTom.classList.remove("rain");
-    liveTom.classList.remove("mist");
-    liveTom.classList.remove("lightRain");
-
-
-  live_aTom.classList.remove("sunny");
-    live_aTom.classList.remove("partlyCloudy");
-    live_aTom.classList.remove("cloudy");
-    live_aTom.classList.remove("snow");
-    live_aTom.classList.remove("storm");
-    live_aTom.classList.remove("rain");
-    live_aTom.classList.remove("lightRain");
-    live_aTom.classList.remove("mist");
-   
-
-    live_aaTom.classList.remove("sunny");
-    live_aaTom.classList.remove("partlyCloudy");
-    live_aaTom.classList.remove("cloudy");
-    live_aaTom.classList.remove("snow");
-    live_aaTom.classList.remove("storm");
-    live_aaTom.classList.remove("rain");
-    live_aaTom.classList.remove("mist");
-    live_aaTom.classList.remove("lightRain");
-
-
-   
-    switch (tom){
-      case "sunny":
-        liveTom.classList.add("sunny");
-        break;
-      case "Partly Cloudy":
-        liveTom.classList.add("partlyCloudy");
-        break;
-      case "Cloudy":
-        liveTom.classList.add("cloudy");
-        break;
-      case "Overcast":
-        liveTom.classList.add("cloudy");
-        break;
-      case "Mist":
-        liveTom.classList.add("mist");
-        break;
-      case "Patchy rain possible":
-        liveTom.classList.add("patchyRain");
-        break;
-      case "Patchy snow possible":
-        liveTom.classList.add("patchySnow");
-        break;
-      case  "Patchy sleet possible":
-        liveTom.classList.add("rain");
-        break;
-      case "Patchy freezing drizzle possible":
-        liveTom.classList.add("rain");
-        break;
-      case "Thundery outbreaks possible":
-        liveTom.classList.add("storm");
-        break;
-      case "Blowing snow":
-        liveTom.classList.add("snow");
-        break;
-      case "Blizzard":
-        liveTom.classList.add("snow");
-        break;
-      case "Fog":
-        liveTom.classList.add("mist")
-        break;
-      case "Freezing fog":
-        liveTom.classList.add("mist");
-        break;
-      case "Light drizzle":
-        liveTom.classList.add("cloudy");
-        break;
-      case "Freezing drizzle":
-        liveTom.classList.add("rain");
-        break;
-      case "Heavy freezing drizzle":
-        liveTom.classList.add("rain");
-        break;
-      case "Patchy light rain":
-        liveTom.classList,add("lightRain");
-        break;
-      case "Light rain":
-        liveTom.classList.add("lightRain");
-        break;
-      case "Moderate rain at times":
-        liveTom.classList.add("lightRain");
-        break;
-      case "Moderate rain":
-        liveTom.classList.add("lightRain");
-        break;
-      case "Heavy rain at times":
-        liveTom.classList.add("rain");
-        break;
-      case "Heavy rain":
-        liveTom.classList.add("rain");
-        break;
-      case "Light freezing rain":
-        liveTom.classList.add("lightRain");
-        break;
-      case "Moderate or heavy freezing rain":
-        liveTom.classList.add("rain");
-        break;
-      case "Light sleet":
-        liveTom.classList.add("lightRain");
-        break;
-      case "Moderate or heavy sleet":
-        liveTom.classList.add("rain");
-        break;
-      case "Patchy light snow":
-        liveTom.classList.add("patchySnow");
-        break;
-      case "Light Snow":
-        liveTom.classList.add("patchySnow");
-        break;
-      case "Patchy moderate snow":
-        liveTom.classList.add("patchySnow");
-        break;
-      case "Moderate snow":
-        liveTom.classList.add("patchySnow");
-        break;
-      case 
-    }
-  }
+}
 
 let townFrm = document.querySelector("form");
 
@@ -251,11 +324,6 @@ townFrm.onsubmit = (event) => {
   let city = document.querySelector("#city").value;
   getWeather(city);
 };
-
-function postCity(city) {
-  let liveCity = document.querySelector("#livecity");
-  liveCity.innerHTML = city;
-}
 
 let cBtn = document.querySelector("#c");
 let fBtn = document.querySelector("#f");
@@ -280,13 +348,14 @@ function checkToggle(btn) {
 }
 
 function toggleTemp(unit) {
-  let liveTemp = document.querySelector(".large-temp");
+
   switch (unit) {
     case "c":
       liveTemp.innerHTML = "29°C";
       break;
     case "f":
-      liveTemp.innerHTML = "69°F";
+      
+;
       break;
   }
 }
